@@ -5,7 +5,7 @@
   "author": "Cícero Viana <cicerohen@gmail.com>",
   "homepage": "https://github.com/cicerohen/boilerplate-mfe",
   "license": "ISC",
-  "main": "src/index.js",
+  "main": "src/eslintrc.json",
   "directories": {
     "src": "src"
   },
@@ -17,6 +17,8 @@
     "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
   },
   "dependencies": {
-    "eslint": "^7.32.0"
+    "@babel/eslint-parser": "^7.16.3",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.28.0"
   }
 }

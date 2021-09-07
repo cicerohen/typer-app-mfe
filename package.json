@@ -6,9 +6,12 @@
   ],
   "scripts": {
     "start": "lerna run --parallel start --stream",
+    "start:standalone": "lerna run --parallel start:standalone --stream",
     "build": "lerna run --parallel build --stream",
+    "deploy": "lerna run --parallel deploy --stream",
     "lint": "lerna run --parallel lint --stream",
-    "format": "lerna run --parallel format --stream",
+    "tsc": "lerna run --parallel tsc --stream",
+    "prettier": "lerna run --parallel prettier --stream",
     "lerna:clean": "lerna clean",
     "lerna:add": "lerna add"
   },

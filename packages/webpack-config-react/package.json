@@ -1,0 +1,22 @@
+{
+  "name": "@mfe/webpack-config-react",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Cícero Viana <cicerohen@gmail.com>",
+  "homepage": "https://github.com/cicerohen/boilerplate-mfe",
+  "license": "ISC",
+  "main": "src/webpack.config.js",
+  "directories": {
+    "src": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
+  },
+  "dependencies": {
+    "@mfe/eslint-config": "^1.0.0"
+  }
+}

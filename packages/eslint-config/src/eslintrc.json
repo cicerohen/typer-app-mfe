@@ -1,0 +1,21 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "@babel/eslint-parser",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "globals": {
+    "System": "readonly",
+    "require": "readonly",
+    "module": "readonly"
+  },
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  }
+}

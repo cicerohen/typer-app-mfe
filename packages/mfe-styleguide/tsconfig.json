@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "declaration": true,
+    "outDir": "dist",
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true,
+    "baseUrl": "./",
+    "paths": {
+      "*": ["node_modules/@types/*", "../../node_modules/@types/*", "*"]
+    }
+  }
+}

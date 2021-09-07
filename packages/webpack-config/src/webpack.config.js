@@ -1,19 +1,33 @@
 const path = require("path");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const SystemJSPublicPathPlugin = require("systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
+const PrettierPlugin = require("prettier-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const StandaloneSingleSpaPlugin = require("standalone-single-spa-webpack-plugin");
 
 module.exports = ({
   orgName,
   projectName,
-  webpackConfigEnv,
+  webpackConfigEnv = {},
   rootDirectoryLevel,
+  generateHTML = true,
+  standaloneOptions = {},
   argv,
 }) => {
+  const isProduction = argv.mode === "production";
+
+  const standaloneOpts = {
+    importMap: require(path.resolve(
+      process.cwd(),
+      "../mfe-root-config/src/importmap.json"
+    )),
+    ...standaloneOptions,
+  };
+
   return {
     mode: argv.mode || "development",
-    entry: path.resolve(process.cwd(), `src/${orgName}-${projectName}`),
+    entry: path.resolve(process.cwd(), `src/${orgName}-${projectName}.ts`),
     output: {
       filename: `${orgName}-${projectName}.js`,
       path: path.resolve(process.cwd(), "dist"),
@@ -24,7 +38,7 @@ module.exports = ({
         type: "system",
       },
     },
-    devtool: "source-map",
+    devtool: "inline-source-map",
     devServer: {
       historyApiFallback: true,
       headers: {
@@ -37,14 +51,14 @@ module.exports = ({
       },
       allowedHosts: "all",
     },
-    externals: ["single-spa", "react", "react-dom"],
+    externals: ["single-spa", new RegExp(`^@${orgName}/`)],
     resolve: {
       extensions: [".mjs", ".js", ".jsx", ".ts", ".tsx", ".wasm", ".json"],
     },
     module: {
       rules: [
         {
-          test: /\.(js|ts)x?$/,
+          test: /\.(ts)x?$/,
           exclude: /node_modules/,
           use: [
             {
@@ -62,6 +76,25 @@ module.exports = ({
           exclude: /node_modules/,
           type: "asset/source",
         },
+        {
+          test: /\.css$/i,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                modules: {
+                  auto: true,
+                  localIdentName:
+                    (isProduction && "[hash:base64:5]") || "[name]__[local]",
+                },
+              },
+            },
+            {
+              loader: "postcss-loader",
+            },
+          ],
+        },
       ],
     },
     plugins: [
@@ -71,20 +104,19 @@ module.exports = ({
       new SystemJSPublicPathPlugin({
         rootDirectoryLevel: rootDirectoryLevel,
       }),
-      new CopyPlugin({
-        patterns: [
-          {
-            from: path.resolve(process.cwd(), "src"),
-          },
-        ],
+      new ESLintPlugin({
+        extensions: ["ts", "tsx"],
       }),
-      // new HtmlWebpackPlugin({
-      //   inject: false,
-      //   template: "src/index.ejs",
-      //   templateParameters: {
-      //     isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
-      //   },
-      // }),
-    ],
+      new PrettierPlugin(),
+      !isProduction && generateHTML && new HtmlWebpackPlugin(),
+      !isProduction &&
+        generateHTML &&
+        new StandaloneSingleSpaPlugin({
+          appOrParcelName: `@${orgName}/${projectName}`,
+          disabled: !webpackConfigEnv.standalone,
+          HtmlWebpackPlugin,
+          ...standaloneOpts,
+        }),
+    ].filter(Boolean),
   };
 };

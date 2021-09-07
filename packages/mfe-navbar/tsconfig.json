@@ -1,7 +1,0 @@
-{
-    "extends": "@mfe/ts-config/src/tsconfig.json",
-    "compilerOptions": {
-      "jsx": "react-jsx",
-    }
-  }
-  
