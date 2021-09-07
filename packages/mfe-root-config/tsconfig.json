@@ -1,0 +1,3 @@
+{
+  "extends": "@mfe/ts-config/src/tsconfig.json"
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@mfe/eslint-config",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Cícero Viana <cicerohen@gmail.com>",
+  "homepage": "https://github.com/cicerohen/boilerplate-mfe",
+  "license": "ISC",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
+  },
+  "dependencies": {
+    "eslint": "^7.32.0"
+  }
+}

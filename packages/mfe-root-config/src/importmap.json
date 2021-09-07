@@ -1,0 +1,7 @@
+{
+    "imports": {
+        "react": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js",
+        "react-dom": "https://unpkg.com/react-dom@17/umd/react-dom.production.min.js",
+        "@mfe/root-config": "//localhost:9000/mfe-root-config.js"
+    }
+}

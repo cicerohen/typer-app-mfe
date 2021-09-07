@@ -1,0 +1,29 @@
+{
+  "name": "@mfe/root-config",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Cícero Viana <cicerohen@gmail.com>",
+  "homepage": "https://github.com/cicerohen/boilerplate-mfe",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
+  },
+  "scripts": {
+    "start": "webpack serve --port 9000 --env isLocal",
+    "build": "webpack --mode=production",
+    "lint": "eslint --fix .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "single-spa": "^5.9.3"
+  },
+  "devDependencies": {
+    "@mfe/babel-config": "^1.0.0",
+    "@mfe/eslint-config": "^1.0.0",
+    "@mfe/prettier-config": "^1.0.0",
+    "@mfe/ts-config": "^1.0.0",
+    "@mfe/webpack-config": "^1.0.0",
+    "html-webpack-plugin": "^5.3.2"
+  }
+}

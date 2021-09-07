@@ -1,0 +1,18 @@
+{
+  "name": "mfe",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "lerna run --parallel start --stream",
+    "build": "lerna run --parallel build --stream",
+    "lint": "lerna run --parallel lint --stream",
+    "format": "lerna run --parallel format --stream",
+    "lerna:clean": "lerna clean",
+    "lerna:add": "lerna add"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}

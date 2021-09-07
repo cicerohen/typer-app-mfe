@@ -1,0 +1,26 @@
+{
+  "name": "@mfe/babel-config",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Cícero Viana <cicerohen@gmail.com>",
+  "homepage": "https://github.com/cicerohen/boilerplate-mfe#readme",
+  "license": "ISC",
+  "main": "src/index.js",
+  "directories": {
+    "src": "src"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cicerohen/boilerplate-mfe/issues"
+  },
+  "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4"
+  }
+}
