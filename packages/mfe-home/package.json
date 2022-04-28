@@ -13,9 +13,10 @@
     "start": "yarn killport && webpack serve --port 8003 --color",
     "start:standalone": "yarn start --env standalone",
     "build": "webpack --mode=production",
-    "deploy": "../../scripts/deploy.sh",
+    "deploy": "../../scripts/deploy-mfe.sh",
     "lint": "eslint . --fix",
     "prettier": "prettier --write .",
+    "format": "yarn lint && yarn prettier",
     "killport": "kill-port --port 8003"
   },
   "devDependencies": {

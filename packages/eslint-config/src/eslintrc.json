@@ -1,5 +1,6 @@
 {
   "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "ignorePatterns": ["/dist/**/*"],
   "parser": "@babel/eslint-parser",
   "settings": {
     "react": {

@@ -35,4 +35,4 @@ jobs:
       - name: Build
         run: yarn build
       - name: Deploy
-        run: chmod +x ./scripts/deploy.sh && yarn deploy
+        run: chmod +x ./scripts/deploy-mfe.sh && yarn deploy

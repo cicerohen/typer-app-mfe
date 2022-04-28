@@ -1,4 +1,5 @@
 const path = require("path");
+const fs = require("fs");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const SystemJSPublicPathPlugin = require("systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
@@ -10,20 +11,11 @@ module.exports = ({
   orgName,
   projectName,
   webpackConfigEnv = {},
-  rootDirectoryLevel,
   generateHTML = true,
   standaloneOptions = {},
   argv,
 }) => {
-  const isProduction = argv.mode === "production";
-
-  const standaloneOpts = {
-    importMap: require(path.resolve(
-      process.cwd(),
-      "../mfe-root-config/src/importmap.json"
-    )),
-    ...standaloneOptions,
-  };
+  const production = argv.mode === "production";
 
   return {
     mode: argv.mode || "development",
@@ -86,7 +78,7 @@ module.exports = ({
                 modules: {
                   auto: true,
                   localIdentName:
-                    (isProduction && "[hash:base64:5]") || "[name]__[local]",
+                    (production && "[hash:base64:5]") || "[name]__[local]",
                 },
               },
             },
@@ -101,21 +93,26 @@ module.exports = ({
       new BundleAnalyzerPlugin({
         analyzerMode: webpackConfigEnv.bundleAnalyzer ? "server" : "disabled",
       }),
-      new SystemJSPublicPathPlugin({
-        rootDirectoryLevel: rootDirectoryLevel,
-      }),
+      new SystemJSPublicPathPlugin(),
       new ESLintPlugin({
         extensions: ["ts", "tsx"],
       }),
       new PrettierPlugin(),
-      !isProduction && generateHTML && new HtmlWebpackPlugin(),
-      !isProduction &&
+      !production && generateHTML && new HtmlWebpackPlugin(),
+      !production &&
         generateHTML &&
         new StandaloneSingleSpaPlugin({
           appOrParcelName: `@${orgName}/${projectName}`,
           disabled: !webpackConfigEnv.standalone,
           HtmlWebpackPlugin,
-          ...standaloneOpts,
+          importMapUrl: new URL(
+            "https://cicerohen-typer-app.s3.amazonaws.com/import-maps/importmap-prod.json"
+          ),
+          importmap: path.resolve(
+            __dirname,
+            "../../mfe-root-config/src/importmap.json"
+          ),
+          ...standaloneOptions,
         }),
     ].filter(Boolean),
   };

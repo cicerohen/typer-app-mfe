@@ -1,23 +1,4 @@
 {
-  "imports": {
-    "@mfe/mfe-auth": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-auth/mfe-auth.js",
-    "@mfe/mfe-auth/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-auth/",
-    "@mfe/mfe-header": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-header/mfe-header.js",
-    "@mfe/mfe-header/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-header/",
-    "@mfe/mfe-sidebar": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-sidebar/mfe-sidebar.js",
-    "@mfe/mfe-sidebar/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-sidebar/",
-    "@mfe/mfe-footer": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-footer/mfe-footer.js",
-    "@mfe/mfe-footer/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-footer/",
-    "@mfe/mfe-home": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-home/mfe-home.js",
-    "@mfe/mfe-home/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-home/",
-    "@mfe/mfe-root-config": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-root-config/mfe-root-config.js",
-    "@mfe/mfe-root-config/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-root-config/",
-    "@mfe/mfe-styleguide": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-styleguide/mfe-styleguide.js",
-    "@mfe/mfe-styleguide/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-styleguide/",
-    "@mfe/mfe-dashboard": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-dashboard/mfe-dashboard.js",
-    "@mfe/mfe-dashboard/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-dashboard/",
-    "@mfe/mfe-editor": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-editor/mfe-editor.js",
-    "@mfe/mfe-editor/": "https://cicerohen-typer-app.s3.amazonaws.com/mfe-editor/"
-  },
+  "imports": {},
   "scopes": {}
 }

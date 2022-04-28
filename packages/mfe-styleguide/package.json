@@ -17,9 +17,10 @@
   "scripts": {
     "start": "yarn killport && webpack serve --port 8000 --color",
     "build": "webpack --mode=production",
-    "deploy": "../../scripts/deploy.sh",
+    "deploy": "../../scripts/deploy-mfe.sh",
     "lint": "eslint . --fix",
     "prettier": "prettier --write .",
+    "format": "yarn lint && yarn prettier",
     "tsc": "tsc  --project ./tsconfig.json",
     "killport": "kill-port --port 8000"
   },

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 PROJECT_NAME="$(basename $PWD)"
 SERVICE_NAME="$(basename $PWD | cut -c 5-)"

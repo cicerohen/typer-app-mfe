@@ -1,10 +1,14 @@
+/* global __dirname */
+
 const { merge } = require("webpack-merge");
 const path = require("path");
 const defaults = require("@mfe/webpack-config");
-const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = (webpackConfigEnv, argv) => {
+  const production = argv.mode === "production";
+
   return merge(
     defaults({
       orgName: "mfe",
@@ -22,14 +26,11 @@ module.exports = (webpackConfigEnv, argv) => {
             isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
           },
         }),
-        new CopyPlugin({
-          patterns: [
-            {
-              from: path.resolve(process.cwd(), "src"),
-            },
-          ],
-        }),
-      ],
+        !production &&
+          new CopyPlugin({
+            patterns: [path.resolve(__dirname, "./src/importmap.json")],
+          }),
+      ].filter(Boolean),
     }
   );
 };
