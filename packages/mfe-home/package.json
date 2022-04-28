@@ -24,12 +24,13 @@
     "@mfe/eslint-config": "^1.0.0",
     "@mfe/prettier-config": "^1.0.0",
     "@mfe/webpack-config-react": "^1.0.0",
+    "@types/react": "^18.0.8",
     "kill-port": "^1.6.1",
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "single-spa-react": "^4.4.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "single-spa-react": "^4.4.0"
   }
 }

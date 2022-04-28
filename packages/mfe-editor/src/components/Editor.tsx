@@ -24,7 +24,9 @@ export const Editor = () => {
 
   const [value] = useState(initialValue);
 
-  const onChange = () => {};
+  const onChange = () => {
+    console.log("onChange editor");
+  };
 
   return (
     <Slate editor={editor} value={value} onChange={onChange}>

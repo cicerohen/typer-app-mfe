@@ -1,5 +1,3 @@
-import React from "react";
-
 export const RenderElement = ({ element, attributes, children }) => {
   if (element.type === "numbered-list") {
     return <ol {...attributes}>{children}</ol>;

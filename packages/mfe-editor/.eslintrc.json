@@ -1,3 +1,7 @@
 {
-  "extends": ["@mfe/eslint-config"]
+  "extends": ["@mfe/eslint-config"],
+  "rules": {
+    "@typescript-eslint/no-this-alias": "off",
+    "prefer-rest-params": "off"
+  }
 }

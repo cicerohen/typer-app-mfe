@@ -8,7 +8,7 @@ export const App = () => {
         <h2 className="text-lg text-white">It is easy and free</h2>
         <a
           href="#"
-          className="border text-white text-xs uppercase px-6 py-4 text-sm  rounded-lg inline-block mt-10"
+          className="border text-white text-xs uppercase px-6 py-4  rounded-lg inline-block mt-10"
         >
           Start Writing
         </a>
