@@ -1,43 +1,18 @@
-import { useEffect, useState, useRef } from "react";
+import { forwardRef } from "react";
 
 import clsx from "clsx";
 
 import { ChevronLeftIcon, PencilAltIcon, NewspaperIcon } from "@mfe/styleguide";
 
-export const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(
-    JSON.parse(localStorage.getItem("typer:sidebar-open"))
-  );
+type Props = {
+  isOpen: boolean;
+  onToggle: () => void;
+};
 
-  const onToggle = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const wrapperRef = useRef();
-
-  useEffect(() => {
-    localStorage.setItem("typer:sidebar-open", isOpen);
-  }, [isOpen]);
-
-  useEffect(() => {
-    const observer = new ResizeObserver((entries) => {
-      if (!entries[0]?.contentRect) {
-        return;
-      }
-      const event = new CustomEvent("typer:sidebar-resize", {
-        detail: {
-          width: entries[0].contentRect.width,
-        },
-      });
-      window.dispatchEvent(event);
-    });
-
-    observer.observe(wrapperRef.current);
-  }, []);
-
+export const Sidebar = forwardRef(({ isOpen, onToggle }: Props, ref) => {
   return (
     <div
-      ref={wrapperRef}
+      ref={ref}
       className={clsx("transition-[width]", (isOpen && "w-64") || "w-12")}
     >
       <aside
@@ -80,4 +55,4 @@ export const Sidebar = () => {
       </aside>
     </div>
   );
-};
+});
