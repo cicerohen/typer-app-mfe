@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 export const App = () => {
   const [sidebarRef, setSidebarRef] = useState<HTMLElement>();
 
-  const callbackRef = useCallback((el) => {
+  const callbackRef = useCallback((el: HTMLElement) => {
     if (el) {
       setSidebarRef(el);
     }
@@ -19,6 +19,9 @@ export const App = () => {
   };
 
   useEffect(() => {
+    if (!sidebarRef) {
+      return;
+    }
     const observer = new ResizeObserver((entries) => {
       if (!entries[0]?.contentRect) {
         return;
