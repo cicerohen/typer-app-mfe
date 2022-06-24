@@ -1,4 +1,4 @@
-name: AWS
+name: Deploy @smart/landing to production
 on:
   push:
     branches:

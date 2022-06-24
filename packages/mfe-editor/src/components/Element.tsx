@@ -1,4 +1,4 @@
-export const RenderElement = ({ element, attributes, children }) => {
+export const Element = ({ element, attributes, children }) => {
   if (element.type === "numbered-list") {
     return <ol {...attributes}>{children}</ol>;
   }
@@ -11,9 +11,5 @@ export const RenderElement = ({ element, attributes, children }) => {
     return <li {...attributes}>{children}</li>;
   }
 
-  return (
-    <p className="bla" {...attributes}>
-      {children}
-    </p>
-  );
+  return <p {...attributes}>{children}</p>;
 };

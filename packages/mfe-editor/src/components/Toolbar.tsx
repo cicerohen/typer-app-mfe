@@ -1,10 +1,5 @@
-import {
-  BoldIcon,
-  FormatItalicIcon,
-  FormatListBulletedIcon,
-  FormatUnderlinedIcon,
-  FormatQuoteIcon,
-} from "@mfe/styleguide";
+import { FormatButton } from "./FormatButton";
+import { Mark, List } from "../services/editor";
 
 export const Toolbar = () => {
   return (
@@ -12,23 +7,13 @@ export const Toolbar = () => {
       <div className="flex py-4 h-16 md:max-w-7xl md:m-auto">
         <div className="flex flex-1 divide-x-2">
           <div className="flex space-x-1">
-            <button>
-              <BoldIcon />
-            </button>
-            <button>
-              <FormatItalicIcon />
-            </button>
-            <button>
-              <FormatUnderlinedIcon />
-            </button>
+            <FormatButton format={Mark.Bold} />
+            <FormatButton format={Mark.Italic} />
+            <FormatButton format={Mark.Underline} />
           </div>
           <div className="flex space-x-1">
-            <button>
-              <FormatListBulletedIcon />
-            </button>
-            <button>
-              <FormatQuoteIcon />
-            </button>
+            <FormatButton format={List.BulletedList} />
+            <FormatButton format={List.NumberedList} />
           </div>
         </div>
         <div>
