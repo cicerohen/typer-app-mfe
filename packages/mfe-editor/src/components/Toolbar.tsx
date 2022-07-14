@@ -1,5 +1,4 @@
 import { FormatButton } from "./FormatButton";
-import { Mark, List } from "../services/editor";
 
 export const Toolbar = () => {
   return (
@@ -7,13 +6,13 @@ export const Toolbar = () => {
       <div className="flex py-4 h-16 md:max-w-7xl md:m-auto">
         <div className="flex flex-1 divide-x-2">
           <div className="flex space-x-1">
-            <FormatButton format={Mark.Bold} />
-            <FormatButton format={Mark.Italic} />
-            <FormatButton format={Mark.Underline} />
+            <FormatButton format="bold" />
+            <FormatButton format="italic" />
+            <FormatButton format="underline" />
           </div>
           <div className="flex space-x-1">
-            <FormatButton format={List.BulletedList} />
-            <FormatButton format={List.NumberedList} />
+            <FormatButton format="bulleted-list" />
+            <FormatButton format="numbered-list" />
           </div>
         </div>
         <div>
