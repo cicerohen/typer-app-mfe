@@ -1,5 +1,5 @@
 {
-  "name": "@mfe/webpack-config-react",
+  "name": "@typer/webpack-config-react",
   "version": "1.0.0",
   "description": "",
   "author": "Cícero Viana <cicerohen@gmail.com>",
@@ -17,6 +17,6 @@
     "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
   },
   "dependencies": {
-    "@mfe/eslint-config": "^1.0.0"
+    "@typer/eslint-config": "^1.0.0"
   }
 }

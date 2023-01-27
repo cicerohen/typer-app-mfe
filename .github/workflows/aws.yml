@@ -1,4 +1,4 @@
-name: Deploy @smart/landing to production
+name: Deploy to production
 on:
   push:
     branches:

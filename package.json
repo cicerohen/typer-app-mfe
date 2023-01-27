@@ -2,24 +2,16 @@
   "name": "mfe",
   "private": true,
   "workspaces": [
+    "mfe/*",
     "packages/*"
   ],
   "scripts": {
-    "start": "lerna run --parallel start --stream",
-    "start:standalone": "lerna run --parallel start:standalone --stream",
-    "build": "lerna run --parallel build --stream",
-    "deploy": "lerna run --parallel deploy --stream",
-    "tsc": "lerna run --parallel tsc --stream",
-    "lint": "lerna run --parallel lint --stream",
-    "prettier:fix": "lerna run --parallel prettier:fix --stream",
-    "format": "lerna run --parallel format --stream",
-    "lerna:clean": "lerna clean",
-    "lerna:add": "lerna add"
+    "start": "turbo run start"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
-    "lerna": "^4.0.0",
-    "lint-staged": "^12.4.1"
+    "lint-staged": "^12.4.1",
+    "turbo": "^1.7.0"
   }
 }

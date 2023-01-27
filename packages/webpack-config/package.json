@@ -1,5 +1,5 @@
 {
-  "name": "@mfe/webpack-config",
+  "name": "@typer/webpack-config",
   "version": "1.0.0",
   "description": "",
   "author": "Cícero Viana <cicerohen@gmail.com>",

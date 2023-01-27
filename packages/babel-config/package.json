@@ -1,5 +1,5 @@
 {
-  "name": "@mfe/babel-config",
+  "name": "@typer/babel-config",
   "version": "1.0.0",
   "description": "",
   "author": "Cícero Viana <cicerohen@gmail.com>",

@@ -1,0 +1,3 @@
+{
+  "extends": "@typer/babel-config"
+}

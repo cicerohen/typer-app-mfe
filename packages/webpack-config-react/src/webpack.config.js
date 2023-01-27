@@ -1,4 +1,4 @@
-const defaults = require("@mfe/webpack-config");
+const defaults = require("@typer/webpack-config");
 
 module.exports = (options) => {
   const config = defaults(options);

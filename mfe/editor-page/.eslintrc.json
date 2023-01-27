@@ -1,0 +1,7 @@
+{
+  "extends": ["@typer/eslint-config"],
+  "rules": {
+    "@typescript-eslint/no-this-alias": "off",
+    "prefer-rest-params": "off"
+  }
+}
