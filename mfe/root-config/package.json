@@ -12,7 +12,7 @@
   "scripts": {
     "start": "yarn killport && webpack serve --port 9000 --env isLocal --color",
     "build": "webpack --mode=production",
-    "deploy": "../../scripts/deploy-mfe.sh",
+    "deploy": "../../scripts/deploy-mfe.js",
     "lint": "eslint . --fix",
     "prettier": "prettier --write .",
     "format": "yarn lint && yarn prettier",

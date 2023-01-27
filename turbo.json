@@ -6,9 +6,13 @@
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**"],
+      "dependsOn": ["format"]
     },
+    "deploy": {
+      "cache": false
+    },
+    "format": {},
     "lint": {}
   }
 }
