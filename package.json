@@ -6,8 +6,10 @@
     "packages/*"
   ],
   "scripts": {
-    "sls:deploy": "serverless deploy --config serverless.yml",
-    "sls:remove": "serverless remove --config serverless.yml",
+    "sls:deploy:development": "serverless deploy --stage development --config serverless.yml",
+    "sls:deploy:production": "serverless deploy --stage production --config serverless.yml",
+    "sls:remove:development": "serverless remove --stage development --config serverless.yml",
+    "sls:remove:production": "serverless remove --stage production --config serverless.yml",
     "deploy": "turbo run deploy --filter=@typer/root-config",
     "start": "turbo run start"
   },
@@ -17,10 +19,12 @@
     "dotenv": "^16.0.3",
     "lint-staged": "^12.4.1",
     "serverless": "^3.31.0",
+    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-s3-cleaner": "^2.0.2",
     "turbo": "^1.7.0"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.337.0"
+    "@aws-sdk/client-s3": "^3.337.0",
+    "aws4": "^1.12.0"
   }
 }

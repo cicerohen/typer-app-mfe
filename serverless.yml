@@ -10,20 +10,16 @@ plugins:
 custom:
   serverless-s3-cleaner:
     buckets:
-      - typer-app-mfe-${opt:stage,self:provider.stage}
+      - typer-app-mfe-${env:STAGE}
 
 provider:
   name: aws
-  stage: dev
-  region: "us-east-1"
+  stage: development
+  region: ${env:REGION}
   runtime: nodejs14.x
-  environment:
-    REGION: us-east-1
-    BUCKET_NAME: typer-app-mfe-${opt:stage,self:provider.stage}
-    NODE_ENV: ${opt:stage,self:provider.stage}
   iam:
     role:
-      name: typer-app-mfe-${opt:stage,self:provider.stage}-role
+      name: typer-app-mfe-${env:STAGE}-role
       statements:
         - Effect: "Allow"
           Action:
@@ -34,15 +30,17 @@ provider:
             - "s3:GetBucketPolicy"
             - "s3:PutBucketPolicy"
           Resource:
-            - arn:aws:s3:::typer-app-mfe-${opt:stage,self:provider.stage}/*
-            - arn:aws:s3:::typer-app-mfe-${opt:stage,self:provider.stage}
+            - arn:aws:s3:::typer-app-mfe-${env:STAGE}/*
+            - arn:aws:s3:::typer-app-mfe-${env:STAGE}
 
 resources:
   Resources:
     TyperAppMfeBucket:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: typer-app-mfe-${opt:stage,self:provider.stage}
+        BucketName: typer-app-mfe-${env:STAGE}
+        WebsiteConfiguration:
+          IndexDocument: index.html
         PublicAccessBlockConfiguration:
           BlockPublicAcls: false
           BlockPublicPolicy: false
@@ -60,7 +58,7 @@ resources:
       Type: AWS::S3::BucketPolicy
       DependsOn: TyperAppMfeBucket
       Properties:
-        Bucket: typer-app-mfe-${opt:stage,self:provider.stage}
+        Bucket: typer-app-mfe-${env:STAGE}
         PolicyDocument:
           Version: "2012-10-17"
           Statement:
@@ -68,4 +66,4 @@ resources:
               Effect: Allow
               Principal: "*"
               Action: s3:GetObject
-              Resource: "arn:aws:s3:::typer-app-mfe-${opt:stage,self:provider.stage}/*"
+              Resource: "arn:aws:s3:::typer-app-mfe-${env:STAGE}/*"
