@@ -4,6 +4,8 @@ _>> **Under development** <<_
 
 It's just a fictional publishing(similar to Medium) app that implements a **micro-frontend architecture** using [single-spa](https://single-spa.js.org/) and [importmap](https://github.com/WICG/import-maps) specifications
 
+[See the Figjam file with an example of mfe architecture here](https://www.figma.com/file/pwb3aAjZzwQhsBOdKLFgz6/MFE-Architecture?type=whiteboard&node-id=0%3A1&t=ARGdj5kjAMjqxwhK-1)
+
 [Click here to see more pet projets](https://github.com/cicerohen/projets)
 
 ### Typer projects

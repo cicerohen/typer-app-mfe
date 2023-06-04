@@ -11,9 +11,12 @@ const domElementGetter =
 registerApplication({
   name: "@typer/home-page",
   app: () => System.import("@typer/home-page"),
-  activeWhen: "/",
+  activeWhen: (location) => location.pathname === "/",
   customProps: {
     domElementGetter: domElementGetter("root"),
+    errorBoundary: (err) => {
+      console.log("dsdddsds", err);
+    },
   },
 });
 
@@ -23,15 +26,21 @@ registerApplication({
   activeWhen: "/signin",
   customProps: {
     domElementGetter: domElementGetter("root"),
+    errorBoundary: (err) => {
+      console.log("dsdddsds", err);
+    },
   },
 });
 
 registerApplication({
-  name: "@typer/sigup-page",
+  name: "@typer/signup-page",
   app: () => System.import("@typer/signup-page"),
   activeWhen: "/signup",
   customProps: {
     domElementGetter: domElementGetter("root"),
+    errorBoundary: (err) => {
+      console.log("dsdddsds", err);
+    },
   },
 });
 
@@ -41,6 +50,9 @@ registerApplication({
   activeWhen: "/articles",
   customProps: {
     domElementGetter: domElementGetter("root"),
+    errorBoundary: (err) => {
+      console.log("dsdddsds", err);
+    },
   },
 });
 
@@ -50,6 +62,9 @@ registerApplication({
   activeWhen: ["/articles/edit", "articles/new"],
   customProps: {
     domElementGetter: domElementGetter("root"),
+    errorBoundary: (err) => {
+      console.log("dsdddsds", err);
+    },
   },
 });
 
