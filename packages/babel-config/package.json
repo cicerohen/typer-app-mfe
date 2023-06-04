@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "author": "Cícero Viana <cicerohen@gmail.com>",
-  "homepage": "https://github.com/cicerohen/boilerplate-mfe#readme",
+  "homepage": "https://github.com/cicerohen/typer-app-mfe#readme",
   "license": "ISC",
   "main": "src/babel.config.json",
   "directories": {
@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
+    "url": "git+https://github.com/cicerohen/typer-app-mfe.git"
   },
   "bugs": {
-    "url": "https://github.com/cicerohen/boilerplate-mfe/issues"
+    "url": "https://github.com/cicerohen/typer-app-mfe/issues"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",

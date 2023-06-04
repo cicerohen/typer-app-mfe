@@ -1,0 +1,39 @@
+{
+  "name": "@typer/signin-page",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Cícero Viana <cicerohen@gmail.com>",
+  "homepage": "https://github.com/cicerohen/typer-app-mfe",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cicerohen/typer-app-mfe.git"
+  },
+  "scripts": {
+    "start": "webpack serve --color",
+    "start:standalone": "yarn start --env standalone",
+    "lint": "eslint . --fix",
+    "prettier": "prettier --write .",
+    "format": "yarn lint && yarn prettier",
+    "build": "yarn format && webpack --mode=production",
+    "deploy": "../../scripts/deploy-mfe.js"
+  },
+  "devDependencies": {
+    "@typer/babel-config": "*",
+    "@typer/eslint-config": "*",
+    "@typer/prettier-config": "*",
+    "@typer/webpack-config-react": "*",
+    "@types/react": "^18.0.8",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
+    "@typer/styleguide": "*",
+    "formik": "^2.2.9",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "single-spa-react": "^4.4.0",
+    "yup": "^0.32.11"
+  }
+}

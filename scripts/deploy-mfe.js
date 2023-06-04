@@ -1,78 +1,131 @@
 #!/usr/bin/env node
 
 const path = require("path");
+const axios = require("axios");
 const fs = require("fs");
+const aws4 = require("aws4");
+const mime = require("mime-types");
 const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3");
 
-const aws4 = require("aws4");
+if (!process.env.STAGE) {
+  console.error("process.env.STAGE was not loaded");
+  process.exit(1);
+}
 
-process.env.NODE_ENV = process.env.NODE_ENV || "development";
-
-require("dotenv").config({
-  path: path.resolve(__dirname, "..", `.env.${process.env.NODE_ENV}`),
-});
-
-const mfePackageJson = JSON.parse(
+const MFE_PACKAGE_JSON = JSON.parse(
   fs.readFileSync(path.resolve(process.cwd(), "./package.json"), "utf8")
 );
 
 const MFE_FOLDER_NAME = path.basename(process.cwd());
 const MFE_DIST_FOLDER_PATH = path.resolve(process.cwd(), "./dist");
-const BUCKET_NAME = `typer-app-mfe-${process.env.STAGE}`;
-const SERVICE_NAME = mfePackageJson.name;
 
-const s3 = new S3Client({ region: process.env.REGION });
+const MFE_JS_FILE_NAME = MFE_PACKAGE_JSON.name
+  .replace("@", "")
+  .replace(/\//g, "-");
+
+const BUCKET_NAME = `typer-app-mfe-${process.env.STAGE}`;
+const SERVICE_NAME = MFE_PACKAGE_JSON.name;
+const SERVICE_URL = `https://${BUCKET_NAME}.s3.amazonaws.com/${MFE_FOLDER_NAME}/${MFE_JS_FILE_NAME}.js`;
+
+const s3 = new S3Client({ region: process.env.REGION || "us-east-1" });
+
+const getFiles = (file, files = []) => {
+  const filePath = path.join(MFE_DIST_FOLDER_PATH, file);
+  const fileStats = fs.statSync(filePath);
+
+  if (fileStats.isFile()) {
+    files.push(file);
+  }
+
+  if (fileStats.isDirectory()) {
+    const dirFiles = fs.readdirSync(filePath);
+    dirFiles.forEach((dirFile) => {
+      getFiles(path.join(file, dirFile), files);
+    });
+  }
+};
 
 const uploadFiles = async () => {
-  try {
-    const files = fs.readdirSync(MFE_DIST_FOLDER_PATH);
+  const distDir = fs.readdirSync(MFE_DIST_FOLDER_PATH);
+  const files = [];
 
-    await Promise.all(
-      files.map(async (file) => {
-        const filePath = path.join(MFE_DIST_FOLDER_PATH, file);
-        const fileStream = fs.createReadStream(filePath);
+  distDir.forEach((file) => {
+    getFiles(file, files);
+  });
 
-        await s3.send(
-          new PutObjectCommand({
-            Bucket: BUCKET_NAME,
-            Key: `${MFE_FOLDER_NAME}/${file}`,
-            Body: fileStream,
-          })
-        );
-      })
-    );
-
-    if (MFE_FOLDER_NAME === "root-config") {
-      const filePath = path.join(MFE_DIST_FOLDER_PATH, "index.html");
+  await Promise.all(
+    files.map(async (file) => {
+      const filePath = path.join(MFE_DIST_FOLDER_PATH, file);
       const fileStream = fs.createReadStream(filePath);
       await s3.send(
         new PutObjectCommand({
           Bucket: BUCKET_NAME,
-          Key: "index.html",
+          Key: `${MFE_FOLDER_NAME}/${file}`,
           Body: fileStream,
+          ContentType: mime.contentType(path.extname(filePath)),
         })
       );
-    }
-  } catch (err) {
-    console.log(err);
+    })
+  );
+
+  if (MFE_FOLDER_NAME === "root-config") {
+    const filePath = path.join(MFE_DIST_FOLDER_PATH, "index.html");
+    const fileStream = fs.createReadStream(filePath);
+    await s3.send(
+      new PutObjectCommand({
+        Bucket: BUCKET_NAME,
+        Key: "index.html",
+        Body: fileStream,
+        ContentType: mime.contentType(path.extname(filePath)),
+      })
+    );
   }
 };
 
-// const signedRequest = aws4.sign(
-//   {
-//     service: "execute-api",
-//     method: "PATCH",
-//     host: process.env.DEPLOYER_API_GATEWAY_HOST,
-//     path: "/services",
-//     body: "{test: {}}",
-//   },
-//   {
-//     secretAccessKey: process.env.AWS_ACCESS_KEY_ID,
-//     accessKeyId: process.env.AWS_SECRET_ACCESS_KEY,
-//   }
-// );
+const updateImportMap = async () => {
+  const signedRequest = aws4.sign(
+    {
+      method: "PATCH",
+      path: "/services",
+      service: "execute-api",
+      host: `${process.env.IMPORTMAP_DEPLOYER_API_HOST}`,
+      headers: {
+        "Content-Type": "application/json",
+        "Cache-Control": "no-cache",
+      },
+      body: JSON.stringify({
+        service: SERVICE_NAME,
+        url: SERVICE_URL,
+        stage: process.env.STAGE,
+      }),
+    },
+    {
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    }
+  );
 
-// uploadFiles();
+  await axios({
+    method: signedRequest.method,
+    url: `https://${signedRequest.host}${signedRequest.path}`,
+    headers: signedRequest.headers,
+    data: signedRequest.body,
+  });
+};
 
-// # echo "Update importmap with ${PROJECT_NAME} URL"
-// # curl -u $DEPLOYER_USERNAME:$DEPLOYER_PASSWORD -d '{ "service": "@mfe/'$SERVICE_NAME'" ,"url": "'$PUBLIC_URL'/'$PROJECT_NAME'/'$PROJECT_NAME'.js" }' -X PATCH $DEPLOYER_URL/services\?env=$DEPLOYER_ENV -H "Accept:application/json" -H "Content-Type:application/json"
+const deploy = async () => {
+  try {
+    console.info(`Starting to upload ${MFE_PACKAGE_JSON.name} to S3`);
+    await uploadFiles();
+
+    console.info(
+      `Starting to update importmap-${process.env.STAGE}.json with the { ${SERVICE_NAME}: ${SERVICE_URL} }`
+    );
+    await updateImportMap();
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  }
+};
+
+deploy();

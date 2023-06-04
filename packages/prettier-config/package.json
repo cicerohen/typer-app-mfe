@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "author": "Cícero Viana <cicerohen@gmail.com>",
-  "homepage": "https://github.com/cicerohen/boilerplate-mfe",
+  "homepage": "https://github.com/cicerohen/typer-app-mfe",
   "license": "ISC",
   "main": "src/prettierrc.json",
   "directories": {
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
+    "url": "git+https://github.com/cicerohen/typer-app-mfe.git"
   },
   "dependencies": {
     "prettier": "^2.3.2"

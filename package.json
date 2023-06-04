@@ -6,25 +6,29 @@
     "packages/*"
   ],
   "scripts": {
-    "sls:deploy:development": "serverless deploy --stage development --config serverless.yml",
-    "sls:deploy:production": "serverless deploy --stage production --config serverless.yml",
-    "sls:remove:development": "serverless remove --stage development --config serverless.yml",
-    "sls:remove:production": "serverless remove --stage production --config serverless.yml",
-    "deploy": "turbo run deploy --filter=@typer/root-config",
-    "start": "turbo run start"
+    "start": "dotenv -e .env -- turbo run start",
+    "start:standalone": "dotenv -e .env -- turbo run start:standalone",
+    "tsc": "turbo run tsc",
+    "build": "dotenv -e .env -- turbo run build",
+    "deploy": "dotenv -e .env -- turbo run deploy",
+    "sls:deploy:dev": "serverless deploy --stage dev --config serverless-dev.yml --verbose",
+    "sls:remove:dev": "serverless remove --stage dev --config serverless-dev.yml --verbose",
+    "sls:deploy:prod": "serverless deploy --stage prod --config serverless-prod.yml --verbose",
+    "sls:remove:prod": "serverless remove --stage prod --config serverless-prod.yml --verbose"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.4",
     "@commitlint/config-conventional": "^16.2.4",
-    "dotenv": "^16.0.3",
+    "dotenv-cli": "^7.2.1",
     "lint-staged": "^12.4.1",
     "serverless": "^3.31.0",
-    "serverless-dotenv-plugin": "^6.0.0",
     "serverless-s3-cleaner": "^2.0.2",
     "turbo": "^1.7.0"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.337.0",
-    "aws4": "^1.12.0"
+    "aws4": "^1.12.0",
+    "axios": "^1.4.0",
+    "mime-types": "^2.1.35"
   }
 }

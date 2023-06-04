@@ -5,8 +5,8 @@
   "author": "Cícero Viana <cicerohen@gmail.com>",
   "homepage": "https://github.com/cicerohen/boilerplate-mfe#readme",
   "license": "ISC",
-  "types": "dist/mfe-styleguide.d.ts",
-  "main": "dist/mfe-styleguide.js",
+  "types": "dist/typer-styleguide.d.ts",
+  "main": "dist/typer-styleguide.js",
   "files": [
     "src"
   ],
@@ -15,14 +15,13 @@
     "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
   },
   "scripts": {
-    "start": "yarn killport && webpack serve --port 8000 --color",
-    "build": "webpack --mode=production",
-    "deploy": "../../scripts/deploy-mfe.sh",
+    "start": "webpack serve --color",
     "lint": "eslint . --fix",
     "prettier": "prettier --write .",
     "format": "yarn lint && yarn prettier",
     "tsc": "tsc  --project ./tsconfig.json",
-    "killport": "kill-port --port 8000"
+    "build": "yarn tsc && webpack --mode=production",
+    "deploy": "../../scripts/deploy-mfe.js"
   },
   "devDependencies": {
     "@typer/babel-config": "*",
@@ -41,10 +40,11 @@
     "url": "https://github.com/cicerohen/boilerplate-mfe/issues"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "autoprefixer": "^10.4.2",
     "clsx": "^1.1.1",
-    "tailwindcss": "^3.0.22",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "tailwindcss": "^3.0.22"
   }
 }

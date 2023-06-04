@@ -23,13 +23,9 @@ module.exports = (webpackConfigEnv, argv) => {
           inject: false,
           template: "src/index.ejs",
           templateParameters: {
-            isLocal: webpackConfigEnv && webpackConfigEnv.isLocal,
+            stage: process.env.STAGE,
           },
         }),
-        !production &&
-          new CopyPlugin({
-            patterns: [path.resolve(__dirname, "./src/importmap.json")],
-          }),
       ].filter(Boolean),
     }
   );

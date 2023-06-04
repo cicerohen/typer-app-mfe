@@ -3,33 +3,32 @@
   "version": "1.0.0",
   "description": "",
   "author": "Cícero Viana <cicerohen@gmail.com>",
-  "homepage": "https://github.com/cicerohen/boilerplate-mfe",
+  "homepage": "https://github.com/cicerohen/typer-app-mfe",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cicerohen/boilerplate-mfe.git"
+    "url": "git+https://github.com/cicerohen/typer-app-mfe.git"
   },
   "scripts": {
-    "start": "yarn killport && webpack serve --port 9000 --env isLocal --color",
-    "build": "webpack --mode=production",
-    "deploy": "../../scripts/deploy-mfe.js",
+    "start": "webpack serve --port 9000 --color",
     "lint": "eslint . --fix",
     "prettier": "prettier --write .",
     "format": "yarn lint && yarn prettier",
-    "killport": "kill-port --port 9000"
+    "build": "yarn format && webpack --mode=production",
+    "deploy": "../../scripts/deploy-mfe.js"
   },
   "dependencies": {
-    "single-spa": "^5.9.3"
+    "single-spa": "^5.9.3",
+    "single-spa-layout": "^2.1.0"
   },
   "devDependencies": {
     "@typer/babel-config": "*",
     "@typer/eslint-config": "*",
     "@typer/prettier-config": "*",
     "@typer/webpack-config": "*",
+    "@types/react": "^18.0.8",
     "copy-webpack-plugin": "^9.0.1",
     "html-webpack-plugin": "^5.3.2",
-    "@types/react": "^18.0.8",
-    "kill-port": "^1.6.1",
     "typescript": "^4.5.4"
   }
 }

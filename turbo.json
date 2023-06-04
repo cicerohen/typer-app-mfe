@@ -5,12 +5,18 @@
       "cache": false,
       "persistent": true
     },
+    "start:standalone": {
+      "cache": false,
+      "persistent": true
+    },
     "build": {
+      "cache": true,
       "outputs": ["dist/**"],
-      "dependsOn": ["format"]
+      "dependsOn": ["^build"]
     },
     "deploy": {
-      "cache": false
+      "cache": false,
+      "dependsOn": ["build"]
     },
     "format": {},
     "lint": {}

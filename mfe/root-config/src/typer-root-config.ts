@@ -9,77 +9,48 @@ const domElementGetter =
   };
 
 registerApplication({
-  name: "@typer/header",
-  app: () => System.import("@typer/header"),
+  name: "@typer/home-page",
+  app: () => System.import("@typer/home-page"),
   activeWhen: "/",
-  customProps: () => ({
-    domElementGetter: domElementGetter("header"),
-  }),
+  customProps: {
+    domElementGetter: domElementGetter("root"),
+  },
 });
 
 registerApplication({
-  name: "@typer/sidebar",
-  app: () => System.import("@typer/sidebar"),
-  activeWhen: "/",
-  customProps: () => ({
-    domElementGetter: domElementGetter("sidebar"),
-  }),
+  name: "@typer/signin-page",
+  app: () => System.import("@typer/signin-page"),
+  activeWhen: "/signin",
+  customProps: {
+    domElementGetter: domElementGetter("root"),
+  },
 });
 
 registerApplication({
-  name: "@typer/footer",
-  app: () => System.import("@typer/footer"),
-  activeWhen: "/",
-  customProps: () => ({
-    domElementGetter: domElementGetter("footer"),
-  }),
+  name: "@typer/sigup-page",
+  app: () => System.import("@typer/signup-page"),
+  activeWhen: "/signup",
+  customProps: {
+    domElementGetter: domElementGetter("root"),
+  },
 });
 
 registerApplication({
-  name: "@typer/home",
-  app: () => System.import("@typer/home"),
-  activeWhen: (location) => location.pathname === "/",
-  customProps: () => ({
-    domElementGetter: domElementGetter("main"),
-  }),
+  name: "@typer/articles-page",
+  app: () => System.import("@typer/articles-page"),
+  activeWhen: "/articles",
+  customProps: {
+    domElementGetter: domElementGetter("root"),
+  },
 });
 
 registerApplication({
-  name: "@typer/signin",
-  app: () => System.import("@typer/auth"),
-  activeWhen: ["/signin"],
-  customProps: () => ({
-    domElementGetter: domElementGetter("main"),
-    intent: "SIGNIN",
-  }),
-});
-
-registerApplication({
-  name: "@typer/signup",
-  app: () => System.import("@typer/auth"),
-  activeWhen: ["/signup"],
-  customProps: () => ({
-    domElementGetter: domElementGetter("main"),
-    intent: "SIGNUP",
-  }),
-});
-
-registerApplication({
-  name: "@typer/dashboard",
-  app: () => System.import("@typer/dashboard"),
-  activeWhen: ["/dashboard", "/me"],
-  customProps: () => ({
-    domElementGetter: domElementGetter("main"),
-  }),
-});
-
-registerApplication({
-  name: "@typer/editor",
-  app: () => System.import("@typer/editor"),
-  activeWhen: ["/articles/new", "/articles/:id/edit"],
-  customProps: () => ({
-    domElementGetter: domElementGetter("main"),
-  }),
+  name: "@typer/article-editor-page",
+  app: () => System.import("@typer/article-editor-page"),
+  activeWhen: ["/articles/edit", "articles/new"],
+  customProps: {
+    domElementGetter: domElementGetter("root"),
+  },
 });
 
 start();

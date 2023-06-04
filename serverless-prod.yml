@@ -1,0 +1,77 @@
+service: typer-app-mfe
+
+frameworkVersion: "3"
+
+useDotenv: true
+
+plugins:
+  - serverless-s3-cleaner
+
+custom:
+  serverless-s3-cleaner:
+    buckets:
+      - typer-app-mfe-prod
+  dotenv:
+    exclude:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN
+    required:
+      env:
+        - REGION
+      file: true
+
+provider:
+  name: aws
+  stage: prod
+  region: ${env:REGION,"us-east-1"}
+  runtime: nodejs14.x
+  iam:
+    role:
+      name: typer-app-mfe-role-prod
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:Put*"
+            - "s3:Get*"
+            - "s3:List*"
+            - "s3:Delete*"
+            - "s3:GetBucketPolicy"
+            - "s3:PutBucketPolicy"
+          Resource:
+            - arn:aws:s3:::typer-app-mfe-prod/*
+            - arn:aws:s3:::typer-app-mfe-prod
+resources:
+  Resources:
+    TyperAppMfeBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: typer-app-mfe-prod
+        WebsiteConfiguration:
+          IndexDocument: index.html
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
+        CorsConfiguration:
+          CorsRules:
+            - AllowedHeaders:
+                - "*"
+              AllowedMethods:
+                - GET
+              AllowedOrigins:
+                - "*"
+    TyperAppMfeBucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      DependsOn: TyperAppMfeBucket
+      Properties:
+        Bucket: typer-app-mfe-prod
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Sid: PublicReadGetObject
+              Effect: Allow
+              Principal: "*"
+              Action: s3:GetObject
+              Resource: "arn:aws:s3:::typer-app-mfe-prod/*"

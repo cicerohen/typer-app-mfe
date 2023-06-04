@@ -1,5 +1,4 @@
 const path = require("path");
-const fs = require("fs");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const SystemJSPublicPathPlugin = require("systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
@@ -106,12 +105,11 @@ module.exports = ({
           disabled: !webpackConfigEnv.standalone,
           HtmlWebpackPlugin,
           importMapUrl: new URL(
-            "https://cicerohen-typer-app.s3.amazonaws.com/import-maps/importmap-prod.json"
+            `https://typer-importmap-deployer.s3.amazonaws.com/importmap-${process.env.STAGE}.json`
           ),
-          importmap: path.resolve(
-            __dirname,
-            "../../mfe-root-config/src/importmap.json"
-          ),
+          importMap: {
+            imports: {},
+          },
           ...standaloneOptions,
         }),
     ].filter(Boolean),
