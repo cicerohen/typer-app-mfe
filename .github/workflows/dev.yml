@@ -10,6 +10,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   REGION: ${{ vars.REGION }}
   STAGE: dev
+  SERVER_GRAPHQL_ENDPOINT: ${{ vars.SERVER_GRAPHQL_ENDPOINT }}
   IMPORTMAP_DEPLOYER_API_HOST: ${{ vars.IMPORTMAP_DEPLOYER_API_HOST }}
 
 jobs:
@@ -33,6 +34,7 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" >> .env
           echo "REGION=${REGION}" > .env
           echo "STAGE=${STAGE}" >> .env
+          echo "SERVER_GRAPHQL_ENDPOINT=${SERVER_GRAPHQL_ENDPOINT}" >> .env
           echo "IMPORTMAP_DEPLOYER_API_HOST=${IMPORTMAP_DEPLOYER_API_HOST}" >> .env
       - name: "Run serverless deploy"
         run: yarn sls:deploy:dev

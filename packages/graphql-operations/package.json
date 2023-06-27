@@ -1,12 +1,12 @@
 {
-  "name": "@typer/styleguide",
+  "name": "@typer/graphql-operations",
   "version": "1.0.0",
   "description": "",
   "author": "Cícero Viana <cicerohen@gmail.com>",
   "homepage": "https://github.com/cicerohen/boilerplate-mfe#readme",
   "license": "ISC",
-  "types": "dist/typer-styleguide.d.ts",
-  "main": "dist/typer-styleguide.js",
+  "types": "dist/typer-graphql.d.ts",
+  "main": "dist/typer-graphql.js",
   "files": [
     "src"
   ],
@@ -21,30 +21,18 @@
     "format": "yarn lint && yarn prettier",
     "tsc": "tsc  --project ./tsconfig.json",
     "build": "yarn tsc && webpack --mode=production",
-    "deploy": "../../scripts/deploy-mfe.js"
+    "deploy": "../../scripts/deploy-mfe.js",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
     "@typer/babel-config": "*",
     "@typer/eslint-config": "*",
     "@typer/prettier-config": "*",
-    "@typer/webpack-config-react": "*",
-    "@types/react": "^18.0.8",
+    "graphql": "^16.7.1",
     "typescript": "^4.5.4"
-  },
-  "peerDependencies": {
-    "react": "^16",
-    "react-dom": "^16"
   },
   "bugs": {
     "url": "https://github.com/cicerohen/boilerplate-mfe/issues"
   },
-  "dependencies": {
-    "@headlessui/react": "^1.7.15",
-    "@heroicons/react": "^2.0.18",
-    "autoprefixer": "^10.4.2",
-    "clsx": "^1.1.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "tailwindcss": "^3.0.22"
-  }
+  "dependencies": {}
 }

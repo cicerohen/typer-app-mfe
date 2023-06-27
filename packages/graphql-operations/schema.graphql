@@ -1,0 +1,45 @@
+type AuthResponse {
+  access_token: String!
+}
+
+type Mutation {
+  deleteUser(id: String!): User!
+  signIn(input: SignInInput!): AuthResponse!
+  signUp(input: SignUpInput!): AuthResponse!
+  updateUser(id: String!, input: UpdateUserInput!): User!
+}
+
+type Query {
+  user(id: String!): User!
+  users: [User!]!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+}
+
+input UpdateUserInput {
+  name: UserNameInput
+}
+
+type User {
+  email: String!
+  id: String!
+  name: UserName!
+}
+
+type UserName {
+  first: String!
+  last: String!
+}
+
+input UserNameInput {
+  first: String = ""
+  last: String = ""
+}

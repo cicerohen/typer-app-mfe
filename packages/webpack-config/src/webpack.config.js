@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const SystemJSPublicPathPlugin = require("systemjs-webpack-interop/SystemJSPublicPathWebpackPlugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
@@ -97,6 +98,7 @@ module.exports = ({
         extensions: ["ts", "tsx"],
       }),
       new PrettierPlugin(),
+      new webpack.EnvironmentPlugin(["SERVER_GRAPHQL_ENDPOINT"]),
       !production && generateHTML && new HtmlWebpackPlugin(),
       !production &&
         generateHTML &&

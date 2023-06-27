@@ -33,7 +33,7 @@ const getFiles = (file, files = []) => {
   const filePath = path.join(MFE_DIST_FOLDER_PATH, file);
   const fileStats = fs.statSync(filePath);
 
-  if (fileStats.isFile()) {
+  if (fileStats.isFile() && path.extname(file) === ".js") {
     files.push(file);
   }
 

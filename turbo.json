@@ -19,6 +19,7 @@
       "dependsOn": ["build"]
     },
     "format": {},
-    "lint": {}
+    "lint": {},
+    "generate": {}
   }
 }

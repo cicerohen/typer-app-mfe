@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { Page } from "@typer/styleguide";
+import { getUsers } from "@typer/graphql";
 
 import { Modal } from "./components/Modal";
 import { SignInForm } from "./components/SignInForm";
@@ -20,8 +21,12 @@ export const App = () => {
   };
 
   const form = useSignInForm({
-    onSubmit: (values) => {
-      console.log("values", values);
+    onSubmit: async () => {
+      try {
+        await getUsers();
+      } catch (err) {
+        console.log("err", err);
+      }
     },
   });
 

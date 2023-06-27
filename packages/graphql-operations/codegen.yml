@@ -1,0 +1,17 @@
+schema:
+  - ${SERVER_GRAPHQL_ENDPOINT}
+generates:
+  "./src/schema.ts":
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      skipTypename: true
+      maybeValue: T | undefined
+  "schema.graphql":
+    plugins:
+      - schema-ast
+documents: ["./src/operations"]
+
+hooks:
+  afterAllFileWrite: ["prettier --write"]

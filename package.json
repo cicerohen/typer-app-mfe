@@ -11,6 +11,7 @@
     "tsc": "turbo run tsc",
     "build": "dotenv -e .env -- turbo run build",
     "deploy": "dotenv -e .env -- turbo run deploy",
+    "generate": "dotenv -e .env -- turbo run generate",
     "sls:deploy:dev": "serverless deploy --stage dev --config serverless-dev.yml --verbose",
     "sls:remove:dev": "serverless remove --stage dev --config serverless-dev.yml --verbose",
     "sls:deploy:prod": "serverless deploy --stage prod --config serverless-prod.yml --verbose",

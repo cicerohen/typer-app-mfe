@@ -1,1 +1,1 @@
-# Articles page
+## @typer/articles-page
